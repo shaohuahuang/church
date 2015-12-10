@@ -9,7 +9,7 @@ config.configServer(app);
 
 
 app.get('/*', function(req, res, next){
-    res.sendFile('prospace.html',{root: path.join(__dirname, 'public')});
+    res.sendFile('default.html',{root: path.join(__dirname, 'public')});
 });
 
 
