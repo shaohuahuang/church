@@ -596,7 +596,7 @@
 	        lectureLeftArray.push('');
 	        lectureRightArray.push('');
 	    }
-	    console.log('It is initiated successfully ------test1&2&3!');
+	    console.log('It is initiated successfully ------test1&2&3&4!');
 	    return { lectureLeftArray: lectureLeftArray, lectureRightArray: lectureRightArray };
 	}
 	module.exports = exports['default'];
