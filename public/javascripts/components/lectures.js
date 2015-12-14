@@ -347,6 +347,6 @@ function getInitState(){
         lectureLeftArray.push('');
         lectureRightArray.push('');
     }
-    console.log('It is initiated successfully ------test1!');
+    console.log('It is initiated successfully ------test1&2!');
     return {lectureLeftArray, lectureRightArray};
 }
