@@ -109,6 +109,7 @@
 	        this.handleChange = this.handleChange.bind(this);
 	        this.onFormat = this.onFormat.bind(this);
 	        this.onSort = this.onSort.bind(this);
+	        this.capitalize = this.capitalize.bind(this);
 	    }
 	
 	    _createClass(Lectures, [{
@@ -334,6 +335,13 @@
 	            if (time1_hour < time2_hour) return -1;else if (time1_hour == time2_hour) return time1_min - time2_min;else return 1;
 	        }
 	    }, {
+	        key: 'capitalize',
+	        value: function capitalize(str) {
+	            var array = str.split(' ');
+	            var result = array.map(capitalizeFirstLetter);
+	            return result.join(' ');
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2['default'].createElement(
@@ -533,7 +541,7 @@
 	                        _react2['default'].createElement(
 	                            'tbody',
 	                            null,
-	                            this.state.finalLectures.map(function (lecture, index) {
+	                            this.state.finalLectures.map((function (lecture, index) {
 	                                return _react2['default'].createElement(
 	                                    'tr',
 	                                    { key: 'formattedLecture' + index },
@@ -552,7 +560,7 @@
 	                                        _react2['default'].createElement(
 	                                            'p',
 	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-	                                            lecture.name
+	                                            this.capitalize(lecture.name)
 	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
@@ -561,7 +569,7 @@
 	                                        _react2['default'].createElement(
 	                                            'p',
 	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-	                                            lecture.dept
+	                                            this.capitalize(lecture.dept)
 	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
@@ -570,7 +578,7 @@
 	                                        _react2['default'].createElement(
 	                                            'p',
 	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-	                                            lecture.lecture
+	                                            this.capitalize(lecture.lecture)
 	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
@@ -579,7 +587,7 @@
 	                                        _react2['default'].createElement(
 	                                            'p',
 	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-	                                            lecture.lecturer
+	                                            this.capitalize(lecture.lecturer)
 	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
@@ -588,11 +596,11 @@
 	                                        _react2['default'].createElement(
 	                                            'p',
 	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-	                                            lecture.sitin
+	                                            this.capitalize(lecture.sitin)
 	                                        )
 	                                    )
 	                                );
-	                            })
+	                            }).bind(this))
 	                        )
 	                    )
 	                )
@@ -613,6 +621,10 @@
 	        lectureRightArray.push('');
 	    }
 	    return { lectureLeftArray: lectureLeftArray, lectureRightArray: lectureRightArray };
+	}
+	
+	function capitalizeFirstLetter(string) {
+	    return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 	module.exports = exports['default'];
 

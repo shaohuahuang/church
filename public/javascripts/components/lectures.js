@@ -13,7 +13,8 @@ class Lectures extends React.Component {
         this.renderRows = this.renderRows.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onFormat = this.onFormat.bind(this);
-        this.onSort = this.onSort.bind(this); 
+        this.onSort = this.onSort.bind(this);
+        this.capitalize = this.capitalize.bind(this);
     }
 
     handleChange(type, index){
@@ -224,6 +225,12 @@ class Lectures extends React.Component {
             return 1;
     }
 
+    capitalize(str){
+        var array = str.split(' ');
+        var result = array.map(capitalizeFirstLetter);
+        return result.join(' ');
+    }
+
     render(){
         return(
             <div>
@@ -310,23 +317,23 @@ class Lectures extends React.Component {
                                             <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.time}</p> 
                                         </td>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.name}</p>
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.name)}</p>
                                         </td>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.dept}</p>
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.dept)}</p>
                                         </td>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.lecture}</p>
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.lecture)}</p>
                                         </td>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.lecturer}</p>
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.lecturer)}</p>
                                         </td>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.sitin}</p>
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.sitin)}</p>
                                         </td>
                                     </tr>
                                 );
-                            })}
+                            }.bind(this))}
                         </tbody>
                     </Table>
                 </div>
@@ -346,4 +353,8 @@ function getInitState(){
         lectureRightArray.push('');
     } 
     return {lectureLeftArray, lectureRightArray};
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
