@@ -124,7 +124,8 @@ class Lectures extends React.Component {
                     dept: self.getMaleDept(item),
                     lecture: item.substring(lessonIndex+15, sitinIndex),
                     lecturer: item.substring(lecturerIndex+12, evangelistIndex),
-                    sitin: item.substring(sitinIndex+18, lecturerIndex)
+                    sitin: item.substring(sitinIndex+18, lecturerIndex),
+                    isMale: true
                 }
 
             }else{
@@ -135,7 +136,8 @@ class Lectures extends React.Component {
                     dept: array[2],
                     lecture: array[3],
                     lecturer: array[4],
-                    sitin: self.getFemaleSitin(array)
+                    sitin: self.getFemaleSitin(array),
+                    isMale: false
                 }
             }
         }.bind(this));
@@ -291,8 +293,7 @@ class Lectures extends React.Component {
                 <div style={this.state.table3Disp}>
                     <Table>
                         <thead>
-                            <tr>
-                                <th>Index</th>
+                            <tr> 
                                 <th>Time</th>
                                 <th>Name</th>
                                 <th>Dept</th>
@@ -304,27 +305,24 @@ class Lectures extends React.Component {
                         <tbody>
                             {this.state.finalLectures.map(function(lecture, index){
                                 return (
-                                    <tr key={'formattedLecture'+index}>
+                                    <tr key={'formattedLecture'+index}> 
                                         <td>
-                                            {index+1}
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.time}</p> 
                                         </td>
                                         <td>
-                                            {lecture.time}  
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.name}</p>
                                         </td>
                                         <td>
-                                            {lecture.name}
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.dept}</p>
                                         </td>
                                         <td>
-                                            {lecture.dept}
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.lecture}</p>
                                         </td>
                                         <td>
-                                            {lecture.lecture}
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.lecturer}</p>
                                         </td>
                                         <td>
-                                            {lecture.lecturer}
-                                        </td>
-                                        <td>
-                                            {lecture.sitin}
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.sitin}</p>
                                         </td>
                                     </tr>
                                 );
@@ -346,7 +344,6 @@ function getInitState(){
     for(var i=0; i<7; i++){
         lectureLeftArray.push('');
         lectureRightArray.push('');
-    }
-    console.log('It is initiated successfully ------test1&2&3&4&5&6!');
+    } 
     return {lectureLeftArray, lectureRightArray};
 }

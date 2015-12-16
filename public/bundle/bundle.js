@@ -241,7 +241,8 @@
 	                        dept: self.getMaleDept(item),
 	                        lecture: item.substring(lessonIndex + 15, sitinIndex),
 	                        lecturer: item.substring(lecturerIndex + 12, evangelistIndex),
-	                        sitin: item.substring(sitinIndex + 18, lecturerIndex)
+	                        sitin: item.substring(sitinIndex + 18, lecturerIndex),
+	                        isMale: true
 	                    };
 	                } else {
 	                    var array = item.split(',');
@@ -251,7 +252,8 @@
 	                        dept: array[2],
 	                        lecture: array[3],
 	                        lecturer: array[4],
-	                        sitin: self.getFemaleSitin(array)
+	                        sitin: self.getFemaleSitin(array),
+	                        isMale: false
 	                    };
 	                }
 	            }).bind(this));
@@ -499,11 +501,6 @@
 	                                _react2['default'].createElement(
 	                                    'th',
 	                                    null,
-	                                    'Index'
-	                                ),
-	                                _react2['default'].createElement(
-	                                    'th',
-	                                    null,
 	                                    'Time'
 	                                ),
 	                                _react2['default'].createElement(
@@ -543,37 +540,56 @@
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        index + 1
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.time
+	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        lecture.time
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.name
+	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        lecture.name
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.dept
+	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        lecture.dept
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.lecture
+	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        lecture.lecture
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.lecturer
+	                                        )
 	                                    ),
 	                                    _react2['default'].createElement(
 	                                        'td',
 	                                        null,
-	                                        lecture.lecturer
-	                                    ),
-	                                    _react2['default'].createElement(
-	                                        'td',
-	                                        null,
-	                                        lecture.sitin
+	                                        _react2['default'].createElement(
+	                                            'p',
+	                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+	                                            lecture.sitin
+	                                        )
 	                                    )
 	                                );
 	                            })
@@ -596,7 +612,6 @@
 	        lectureLeftArray.push('');
 	        lectureRightArray.push('');
 	    }
-	    console.log('It is initiated successfully ------test1&2&3&4&5&6!');
 	    return { lectureLeftArray: lectureLeftArray, lectureRightArray: lectureRightArray };
 	}
 	module.exports = exports['default'];
