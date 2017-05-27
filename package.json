@@ -6,7 +6,7 @@
     "node": "7.10.0"
   },
   "scripts": {
-    "postinstall": "webpack -d"
+    "postinstall": "node_modules/.bin/webpack -d"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
