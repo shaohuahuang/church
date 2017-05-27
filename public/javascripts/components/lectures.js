@@ -1,5 +1,6 @@
 import React from 'react';
-import {Table, Input, Button} from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import {Table, FormControl, Button} from 'react-bootstrap';
 
 class Lectures extends React.Component {
     constructor(){
@@ -19,9 +20,9 @@ class Lectures extends React.Component {
 
     handleChange(type, index){
         if(type=="left")
-            this.state.lectureLeftArray[index] = this.refs[type+index].getValue();
+            this.state.lectureLeftArray[index] = ReactDOM.findDOMNode(this.refs[type+index]).value;
         else
-            this.state.lectureRightArray[index] = this.refs[type+index].getValue();
+            this.state.lectureRightArray[index] = ReactDOM.findDOMNode(this.refs[type+index]).value;
         this.setState(this.state);
     }
 
@@ -32,13 +33,13 @@ class Lectures extends React.Component {
                 <tr key={'lectures'+i}>
                     <td>{i+1}</td>
                     <td>
-                        <Input type='text' ref={"left"+i}
+                        <FormControl type='text' ref={"left"+i}
                             onChange={this.handleChange.bind(this,"left",i)}
                             value={this.state.lectureLeftArray[i]} />
                     </td>
                     <td>{i+8}</td>
                     <td>
-                        <Input type='text' ref={'right'+i}
+                        <FormControl type='text' ref={'right'+i}
                             onChange={this.handleChange.bind(this,"right",i)}
                             value={this.state.lectureRightArray[i]} />
                     </td>
@@ -163,12 +164,12 @@ class Lectures extends React.Component {
         var self = this;
         for(var i=0; i<length; i++){
             result.push({
-                time: self.refs['time'+i].getValue(),
-                name: self.refs['name'+i].getValue(),
-                dept: self.refs['dept'+i].getValue(),
-                lecture: self.refs['lecture'+i].getValue(),
-                lecturer: self.refs['lecturer'+i].getValue(),
-                sitin: self.refs['sitin'+i].getValue()
+              time: ReactDOM.findDOMNode(this.refs['time'+i]).value,
+	            name: ReactDOM.findDOMNode(this.refs['name'+i]).value,
+	            dept: ReactDOM.findDOMNode(this.refs['dept'+i]).value,
+	            lecture: ReactDOM.findDOMNode(this.refs['lecture'+i]).value,
+	            lecturer: ReactDOM.findDOMNode(this.refs['lecturer'+i]).value,
+	            sitin: ReactDOM.findDOMNode(this.refs['sitin'+i]).value
             });
         };
         result.sort(function(a, b){
@@ -235,22 +236,22 @@ class Lectures extends React.Component {
         return(
             <div>
                 <div style={this.state.table1Disp}>
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th>Index</th>
-                                <th>Lecture</th>
-                                <th>Index</th>
-                                <th>Lecture</th>
-                            </tr> 
-                        </thead>
-                        <tbody>
-                            {this.renderRows()}
-                        </tbody>
-                    </Table>
-                    <Button onClick={this.onFormat}>Format</Button>
+                  <Table>
+                      <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Lecture</th>
+                            <th>Index</th>
+                            <th>Lecture</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {this.renderRows()}
+                      </tbody>
+                  </Table>
+                  <Button onClick={this.onFormat}>Format</Button>
                 </div>
-                
+
                 <div style={this.state.table2Disp}>
                     <Table>
                         <thead>
@@ -272,22 +273,22 @@ class Lectures extends React.Component {
                                             {index+1}
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'time'+index} defaultValue={lecture.time.trim()}/>
+                                            <FormControl type='text' ref={'time'+index} defaultValue={lecture.time.trim()}/>
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'name'+index} defaultValue={lecture.name.trim()}/>
+                                            <FormControl type='text' ref={'name'+index} defaultValue={lecture.name.trim()}/>
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'dept'+index} defaultValue={lecture.dept.trim()}/>
+                                            <FormControl type='text' ref={'dept'+index} defaultValue={lecture.dept.trim()}/>
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'lecture'+index} defaultValue={lecture.lecture.trim()}/>
+                                            <FormControl type='text' ref={'lecture'+index} defaultValue={lecture.lecture.trim()}/>
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'lecturer'+index} defaultValue={lecture.lecturer.trim()}/>
+                                            <FormControl type='text' ref={'lecturer'+index} defaultValue={lecture.lecturer.trim()}/>
                                         </td>
                                         <td>
-                                            <Input type='text' ref={'sitin'+index} defaultValue={lecture.sitin.trim()}/>
+                                            <FormControl type='text' ref={'sitin'+index} defaultValue={lecture.sitin.trim()}/>
                                         </td>
                                     </tr>
                                 );
@@ -300,7 +301,7 @@ class Lectures extends React.Component {
                 <div style={this.state.table3Disp}>
                     <Table>
                         <thead>
-                            <tr> 
+                            <tr>
                                 <th>Time</th>
                                 <th>Name</th>
                                 <th>Dept</th>
@@ -312,9 +313,9 @@ class Lectures extends React.Component {
                         <tbody>
                             {this.state.finalLectures.map(function(lecture, index){
                                 return (
-                                    <tr key={'formattedLecture'+index}> 
+                                    <tr key={'formattedLecture'+index}>
                                         <td>
-                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.time}</p> 
+                                            <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture.time}</p>
                                         </td>
                                         <td>
                                             <p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{this.capitalize(lecture.name)}</p>
@@ -337,7 +338,7 @@ class Lectures extends React.Component {
                         </tbody>
                     </Table>
                 </div>
-            </div> 
+            </div>
         );
     }
 }

@@ -7,7 +7,7 @@ module.exports.configServer = function(app){
     app.set('port', 3001);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, '/')));
 }
 
 module.exports.startServer = function(app){
