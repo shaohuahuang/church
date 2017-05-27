@@ -5,6 +5,9 @@
   "engines": {
     "node": "7.10.0"
   },
+  "scripts": {
+    "postinstall": "webpack -d"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
