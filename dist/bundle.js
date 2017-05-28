@@ -48465,6 +48465,10 @@ var _reactRouterRedux = __webpack_require__(523);
 
 var _reduxConnect = __webpack_require__(575);
 
+var _util = __webpack_require__(576);
+
+var _util2 = _interopRequireDefault(_util);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48608,49 +48612,9 @@ var Lectures = function (_React$Component) {
                 });
             };
             result.sort(function (a, b) {
-                return self.compareTime(a.time, b.time);
+                return _util2.default.compareTime(a.time, b.time);
             });
             return result;
-        }
-    }, {
-        key: 'isMorning',
-        value: function isMorning(time) {
-            return time.indexOf('am') > 0;
-        }
-    }, {
-        key: 'compareTime',
-        value: function compareTime(time1, time2) {
-            if (this.isMorning(time1) && !this.isMorning(time2)) return -1;
-            if (!this.isMorning(time1) && this.isMorning(time2)) return 1;
-            var time1_hour, time1_min, time2_hour, time2_min;
-
-            if (time1.indexOf(':') == -1) {
-                time1_hour = time1.substring(0, time1.length - 2);
-                time1_min = 0;
-            } else {
-                var array = time1.split(':');
-                time1_hour = array[0];
-                time1_min = array[1].substring(0, array[1].length - 2);
-            }
-
-            if (time2.indexOf(':') == -1) {
-                time2_hour = time2.substring(0, time2.length - 2);
-                time2_min = 0;
-            } else {
-                var array = time2.split(':');
-                time2_hour = array[0];
-                time2_min = array[1].substring(0, array[1].length - 2);
-            }
-
-            time1_hour = parseFloat(time1_hour);
-            time2_hour = parseFloat(time2_hour);
-            time1_min = parseFloat(time1_min);
-            time2_min = parseFloat(time2_min);
-
-            if (time1_hour == 12 && time2_hour == 12) return time1_min - time2_min;
-            if (time1_hour == 12) return -1;
-            if (time2_hour == 12) return 1;
-            if (time1_hour < time2_hour) return -1;else if (time1_hour == time2_hour) return time1_min - time2_min;else return 1;
         }
     }, {
         key: 'capitalize',
@@ -54242,6 +54206,58 @@ function getConnectedComponent(componnet, actions, stateSelector) {
 
 	return (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(componnet);
 }
+
+/***/ }),
+/* 576 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var util = {
+	isMorning: function isMorning(time) {
+		return time.indexOf('am') > 0;
+	},
+
+	compareTime: function compareTime(time1, time2) {
+		if (this.isMorning(time1) && !this.isMorning(time2)) return -1;
+		if (!this.isMorning(time1) && this.isMorning(time2)) return 1;
+		var time1_hour, time1_min, time2_hour, time2_min;
+
+		if (time1.indexOf(':') == -1) {
+			time1_hour = time1.substring(0, time1.length - 2);
+			time1_min = 0;
+		} else {
+			var array = time1.split(':');
+			time1_hour = array[0];
+			time1_min = array[1].substring(0, array[1].length - 2);
+		}
+
+		if (time2.indexOf(':') == -1) {
+			time2_hour = time2.substring(0, time2.length - 2);
+			time2_min = 0;
+		} else {
+			var array = time2.split(':');
+			time2_hour = array[0];
+			time2_min = array[1].substring(0, array[1].length - 2);
+		}
+
+		time1_hour = parseFloat(time1_hour);
+		time2_hour = parseFloat(time2_hour);
+		time1_min = parseFloat(time1_min);
+		time2_min = parseFloat(time2_min);
+
+		if (time1_hour == 12 && time2_hour == 12) return time1_min - time2_min;
+		if (time1_hour == 12) return -1;
+		if (time2_hour == 12) return 1;
+		if (time1_hour < time2_hour) return -1;else if (time1_hour == time2_hour) return time1_min - time2_min;else return 1;
+	}
+};
+
+exports.default = util;
 
 /***/ })
 /******/ ]);
