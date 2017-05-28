@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Table, FormControl, Button} from 'react-bootstrap';
+import {push} from 'react-router-redux';
+import {getConnectedComponent} from '../util/redux-connect';
 
 class Lectures extends React.Component {
     constructor(){
@@ -72,24 +74,26 @@ class Lectures extends React.Component {
     }
   
     onFormat(){
-        var self = this;
-        var combinedArray = this.combineBothArrays();
-        this.state.formattedLectures = combinedArray.map(function(item){
-            var array = item.split(',');
-            return {
-                time: array[0],
-                name: array[1],
-                dept: array[2],
-                lecture: array[3],
-                lecturer: array[4],
-                sitin: self.getFemaleSitin(array),
-                isMale: false
-            }
-        }.bind(this));
-        this.state.table1Disp = {display: 'none'};
-        this.state.table2Disp = {display: 'block'};
-        this.state.table3Disp = {display: 'none'};
-        this.setState(this.state);
+        // var self = this;
+        // var combinedArray = this.combineBothArrays();
+        // this.state.formattedLectures = combinedArray.map(function(item){
+        //     var array = item.split(',');
+        //     return {
+        //         time: array[0],
+        //         name: array[1],
+        //         dept: array[2],
+        //         lecture: array[3],
+        //         lecturer: array[4],
+        //         sitin: self.getFemaleSitin(array),
+        //         isMale: false
+        //     }
+        // }.bind(this));
+        // this.state.table1Disp = {display: 'none'};
+        // this.state.table2Disp = {display: 'block'};
+        // this.state.table3Disp = {display: 'none'};
+        // this.setState(this.state);
+        this.props.push('/sort');
+        
     } 
 
     onSort(){
@@ -285,7 +289,9 @@ class Lectures extends React.Component {
     }
 }
 
-export default Lectures;
+export default getConnectedComponent(Lectures, [{push}], (state)=>{
+	return {}
+});
 
 
 function getInitState(){

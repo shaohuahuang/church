@@ -1,17 +1,3 @@
-// import Lectures from './javascripts/components/lectures-formatter';
-// import {render} from 'react-dom';
-// import React from 'react';
-// // import {Router, Route, browserHistory} from 'react-router';
-// import {BrowserRouter, Route} from 'react-router-dom';
-//
-// render(<Lectures />, document.getElementById('app'));
-// //
-// // render((
-// // 	<BrowserRouter>
-// // 		<Route path="/" component={Lectures}/>
-// // 	</BrowserRouter>
-// // ), document.getElementById("app"));
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -27,7 +13,7 @@ import LectureSorter from './components/LectureSorter';
 import LectureResult from './components/LectureResult';
 
 import { Router, Route, browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux';
 
 const routes = (
 	<Route>
@@ -39,8 +25,9 @@ const routes = (
 	</Route>
 );
 
+const middleware = routerMiddleware(browserHistory);
 const finalCreateStore = compose(
-	applyMiddleware(thunk)
+	applyMiddleware(thunk, middleware)
 )(createStore);
 
 const store = finalCreateStore(rootReducer);

@@ -17775,20 +17775,6 @@ var _reactRouterRedux = __webpack_require__(523);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import Lectures from './javascripts/components/lectures-formatter';
-// import {render} from 'react-dom';
-// import React from 'react';
-// // import {Router, Route, browserHistory} from 'react-router';
-// import {BrowserRouter, Route} from 'react-router-dom';
-//
-// render(<Lectures />, document.getElementById('app'));
-// //
-// // render((
-// // 	<BrowserRouter>
-// // 		<Route path="/" component={Lectures}/>
-// // 	</BrowserRouter>
-// // ), document.getElementById("app"));
-
 var routes = _react2.default.createElement(
 	_reactRouter.Route,
 	null,
@@ -17801,7 +17787,8 @@ var routes = _react2.default.createElement(
 	)
 );
 
-var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default))(_redux.createStore);
+var middleware = (0, _reactRouterRedux.routerMiddleware)(_reactRouter.browserHistory);
+var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default, middleware))(_redux.createStore);
 
 var store = finalCreateStore(_main2.default);
 var history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
@@ -48474,6 +48461,10 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactBootstrap = __webpack_require__(352);
 
+var _reactRouterRedux = __webpack_require__(523);
+
+var _reduxConnect = __webpack_require__(575);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -48571,24 +48562,25 @@ var Lectures = function (_React$Component) {
     }, {
         key: 'onFormat',
         value: function onFormat() {
-            var self = this;
-            var combinedArray = this.combineBothArrays();
-            this.state.formattedLectures = combinedArray.map(function (item) {
-                var array = item.split(',');
-                return {
-                    time: array[0],
-                    name: array[1],
-                    dept: array[2],
-                    lecture: array[3],
-                    lecturer: array[4],
-                    sitin: self.getFemaleSitin(array),
-                    isMale: false
-                };
-            }.bind(this));
-            this.state.table1Disp = { display: 'none' };
-            this.state.table2Disp = { display: 'block' };
-            this.state.table3Disp = { display: 'none' };
-            this.setState(this.state);
+            // var self = this;
+            // var combinedArray = this.combineBothArrays();
+            // this.state.formattedLectures = combinedArray.map(function(item){
+            //     var array = item.split(',');
+            //     return {
+            //         time: array[0],
+            //         name: array[1],
+            //         dept: array[2],
+            //         lecture: array[3],
+            //         lecturer: array[4],
+            //         sitin: self.getFemaleSitin(array),
+            //         isMale: false
+            //     }
+            // }.bind(this));
+            // this.state.table1Disp = {display: 'none'};
+            // this.state.table2Disp = {display: 'block'};
+            // this.state.table3Disp = {display: 'none'};
+            // this.setState(this.state);
+            this.props.push('/sort');
         }
     }, {
         key: 'onSort',
@@ -48937,7 +48929,9 @@ var Lectures = function (_React$Component) {
     return Lectures;
 }(_react2.default.Component);
 
-exports.default = Lectures;
+exports.default = (0, _reduxConnect.getConnectedComponent)(Lectures, [{ push: _reactRouterRedux.push }], function (state) {
+    return {};
+});
 
 
 function getInitState() {
@@ -54216,6 +54210,38 @@ module.exports = function (str) {
 	});
 };
 
+
+/***/ }),
+/* 575 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.getConnectedComponent = getConnectedComponent;
+
+var _redux = __webpack_require__(509);
+
+var _reactRedux = __webpack_require__(487);
+
+function getConnectedComponent(componnet, actions, stateSelector) {
+	function mapStateToProps(state) {
+		return stateSelector(state);
+	}
+
+	function mapDispatchToProps(dispatch) {
+		var combinedActions = {};
+		actions.forEach(function (action) {
+			Object.assign(combinedActions, action);
+		});
+		return (0, _redux.bindActionCreators)(combinedActions, dispatch);
+	}
+
+	return (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(componnet);
+}
 
 /***/ })
 /******/ ]);
