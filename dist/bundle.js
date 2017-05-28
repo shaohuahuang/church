@@ -48446,7 +48446,7 @@ function reduce() {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -48477,440 +48477,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Lectures = function (_React$Component) {
-    _inherits(Lectures, _React$Component);
+var LectureFormatter = function (_React$Component) {
+	_inherits(LectureFormatter, _React$Component);
 
-    function Lectures() {
-        _classCallCheck(this, Lectures);
+	function LectureFormatter() {
+		_classCallCheck(this, LectureFormatter);
 
-        var _this = _possibleConstructorReturn(this, (Lectures.__proto__ || Object.getPrototypeOf(Lectures)).call(this));
+		return _possibleConstructorReturn(this, (LectureFormatter.__proto__ || Object.getPrototypeOf(LectureFormatter)).call(this));
+	}
 
-        _this.state = getInitState();
-        _this.state.formattedLectures = [];
-        _this.state.finalLectures = [];
-        _this.state.table1Disp = { display: 'block' };
-        _this.state.table2Disp = { display: 'none' };
-        _this.state.table3Disp = { display: 'none' };
-        _this.renderRows = _this.renderRows.bind(_this);
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.onFormat = _this.onFormat.bind(_this);
-        _this.onSort = _this.onSort.bind(_this);
-        _this.capitalize = _this.capitalize.bind(_this);
-        return _this;
-    }
+	_createClass(LectureFormatter, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'div',
+					{ className: 'textareaContainer' },
+					_react2.default.createElement(
+						'div',
+						{ style: { width: "45%", float: "left", marginLeft: "25px" } },
+						_react2.default.createElement(
+							'p',
+							null,
+							'Female Lectures'
+						),
+						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ style: { width: "45%", float: "right", marginRight: "25px" } },
+						_react2.default.createElement(
+							'p',
+							null,
+							'Male Lectures'
+						),
+						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea' })
+					)
+				),
+				_react2.default.createElement(
+					_reactBootstrap.Button,
+					{ style: { marginTop: "25px", marginLeft: "25px" } },
+					'Format'
+				)
+			);
+		}
+	}]);
 
-    _createClass(Lectures, [{
-        key: 'handleChange',
-        value: function handleChange(type, index) {
-            if (type == "left") this.state.lectureLeftArray[index] = _reactDom2.default.findDOMNode(this.refs[type + index]).value;else this.state.lectureRightArray[index] = _reactDom2.default.findDOMNode(this.refs[type + index]).value;
-            this.setState(this.state);
-        }
-    }, {
-        key: 'renderRows',
-        value: function renderRows() {
-            var rows = [];
-            for (var i = 0; i < 7; i++) {
-                rows.push(_react2.default.createElement(
-                    'tr',
-                    { key: 'lectures' + i },
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        i + 1
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: "left" + i,
-                            onChange: this.handleChange.bind(this, "left", i),
-                            value: this.state.lectureLeftArray[i] })
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        i + 8
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'right' + i,
-                            onChange: this.handleChange.bind(this, "right", i),
-                            value: this.state.lectureRightArray[i] })
-                    )
-                ));
-            }
-            return rows;
-        }
-    }, {
-        key: 'combineBothArrays',
-        value: function combineBothArrays() {
-            var result = [];
-            this.state.lectureLeftArray.forEach(function (item) {
-                if (item) result.push(item);
-            });
-            this.state.lectureRightArray.forEach(function (item) {
-                if (item) result.push(item);
-            });
-            return result;
-        }
-    }, {
-        key: 'getFemaleSitin',
-        value: function getFemaleSitin(array) {
-            var result = [];
-            var length = array.length;
-            for (var i = 5; i < length - 1; i++) {
-                result.push(array[i]);
-            }
-            return result.join(', ');
-        }
-    }, {
-        key: 'onFormat',
-        value: function onFormat() {
-            // var self = this;
-            // var combinedArray = this.combineBothArrays();
-            // this.state.formattedLectures = combinedArray.map(function(item){
-            //     var array = item.split(',');
-            //     return {
-            //         time: array[0],
-            //         name: array[1],
-            //         dept: array[2],
-            //         lecture: array[3],
-            //         lecturer: array[4],
-            //         sitin: self.getFemaleSitin(array),
-            //         isMale: false
-            //     }
-            // }.bind(this));
-            // this.state.table1Disp = {display: 'none'};
-            // this.state.table2Disp = {display: 'block'};
-            // this.state.table3Disp = {display: 'none'};
-            // this.setState(this.state);
-            this.props.push('/sort');
-        }
-    }, {
-        key: 'onSort',
-        value: function onSort() {
-            this.state.table1Disp = { display: 'none' };
-            this.state.table2Disp = { display: 'none' };
-            this.state.table3Disp = { display: 'block' };
-            this.state.finalLectures = this.getFinalLecturesArray();
-            this.setState(this.state);
-        }
-    }, {
-        key: 'getFinalLecturesArray',
-        value: function getFinalLecturesArray() {
-            var result = [];
-            var length = this.state.formattedLectures.length;
-            var self = this;
-            for (var i = 0; i < length; i++) {
-                result.push({
-                    time: _reactDom2.default.findDOMNode(this.refs['time' + i]).value,
-                    name: _reactDom2.default.findDOMNode(this.refs['name' + i]).value,
-                    dept: _reactDom2.default.findDOMNode(this.refs['dept' + i]).value,
-                    lecture: _reactDom2.default.findDOMNode(this.refs['lecture' + i]).value,
-                    lecturer: _reactDom2.default.findDOMNode(this.refs['lecturer' + i]).value,
-                    sitin: _reactDom2.default.findDOMNode(this.refs['sitin' + i]).value
-                });
-            };
-            result.sort(function (a, b) {
-                return _util2.default.compareTime(a.time, b.time);
-            });
-            return result;
-        }
-    }, {
-        key: 'capitalize',
-        value: function capitalize(str) {
-            var array = str.split(' ');
-            var result = array.map(capitalizeFirstLetter);
-            return result.join(' ');
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'div',
-                    { style: this.state.table1Disp },
-                    _react2.default.createElement(
-                        _reactBootstrap.Table,
-                        null,
-                        _react2.default.createElement(
-                            'thead',
-                            null,
-                            _react2.default.createElement(
-                                'tr',
-                                null,
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Index'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecture'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Index'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecture'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tbody',
-                            null,
-                            this.renderRows()
-                        )
-                    ),
-                    _react2.default.createElement(
-                        _reactBootstrap.Button,
-                        { onClick: this.onFormat },
-                        'Format'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { style: this.state.table2Disp },
-                    _react2.default.createElement(
-                        _reactBootstrap.Table,
-                        null,
-                        _react2.default.createElement(
-                            'thead',
-                            null,
-                            _react2.default.createElement(
-                                'tr',
-                                null,
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Index'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Time'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Name'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Dept'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecture'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecturer'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Sit-In'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tbody',
-                            null,
-                            this.state.formattedLectures.map(function (lecture, index) {
-                                return _react2.default.createElement(
-                                    'tr',
-                                    { key: 'formattedLecture' + index },
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        index + 1
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'time' + index, defaultValue: lecture.time.trim() })
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'name' + index, defaultValue: lecture.name.trim() })
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'dept' + index, defaultValue: lecture.dept.trim() })
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'lecture' + index, defaultValue: lecture.lecture.trim() })
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'lecturer' + index, defaultValue: lecture.lecturer.trim() })
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: 'sitin' + index, defaultValue: lecture.sitin.trim() })
-                                    )
-                                );
-                            })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        _reactBootstrap.Button,
-                        { onClick: this.onSort },
-                        'Sort'
-                    )
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { style: this.state.table3Disp },
-                    _react2.default.createElement(
-                        _reactBootstrap.Table,
-                        null,
-                        _react2.default.createElement(
-                            'thead',
-                            null,
-                            _react2.default.createElement(
-                                'tr',
-                                null,
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Time'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Name'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Dept'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecture'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Lecturer'
-                                ),
-                                _react2.default.createElement(
-                                    'th',
-                                    null,
-                                    'Sit-In'
-                                )
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'tbody',
-                            null,
-                            this.state.finalLectures.map(function (lecture, index) {
-                                return _react2.default.createElement(
-                                    'tr',
-                                    { key: 'formattedLecture' + index },
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            lecture.time
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            this.capitalize(lecture.name)
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            this.capitalize(lecture.dept)
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            this.capitalize(lecture.lecture)
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            this.capitalize(lecture.lecturer)
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        'td',
-                                        null,
-                                        _react2.default.createElement(
-                                            'p',
-                                            { style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
-                                            this.capitalize(lecture.sitin)
-                                        )
-                                    )
-                                );
-                            }.bind(this))
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Lectures;
+	return LectureFormatter;
 }(_react2.default.Component);
 
-exports.default = (0, _reduxConnect.getConnectedComponent)(Lectures, [{ push: _reactRouterRedux.push }], function (state) {
-    return {};
-});
-
-
-function getInitState() {
-    var lectureLeftArray = [];
-    var lectureRightArray = [];
-    for (var i = 0; i < 7; i++) {
-        lectureLeftArray.push('');
-        lectureRightArray.push('');
-    }
-    return { lectureLeftArray: lectureLeftArray, lectureRightArray: lectureRightArray };
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+exports.default = LectureFormatter;
 
 /***/ }),
 /* 521 */
