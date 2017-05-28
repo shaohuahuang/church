@@ -62,10 +62,6 @@ class Lectures extends React.Component {
         return result;
     }
 
-    isMale(lecture){
-        return lecture.indexOf('Who sitting in')>0;
-    }
-
     getFemaleSitin(array){
         var result = [];
         var length = array.length;
@@ -74,76 +70,22 @@ class Lectures extends React.Component {
         }
         return result.join(', ');
     }
-
-    getMaleDept(lecture){
-        var index = lecture.indexOf(' NC ');
-        return lecture.substring(0, index);
-    }
-
-    getNameIndex(lecture){
-        return lecture.indexOf('1. Name:');
-    }
-
-    getVenueIndex(lecture){
-        return lecture.indexOf('2. Venue:');
-    }
-
-    getTimeIndex(lecture){
-        return lecture.indexOf('3. Time:');
-    }
-
-    getLectureIndex(lecture){
-        return lecture.indexOf('4. What lesson:');
-    }
-
-    getSitinIndex(lecture){
-        return lecture.indexOf('5. Who sitting in:');
-    }
-
-    getLecturerIndex(lecture){
-        return lecture.indexOf('6. Lecturer:');
-    }
-
-    getEvangelistIndex(lecture){
-        return lecture.indexOf('7. Evangelist:');
-    }
-
+  
     onFormat(){
         var self = this;
         var combinedArray = this.combineBothArrays();
         this.state.formattedLectures = combinedArray.map(function(item){
-            if(this.isMale(item)){
-                var nameIndex = this.getNameIndex(item);
-                var venueIndex = this.getVenueIndex(item);
-                var timeIndex = this.getTimeIndex(item);
-                var lessonIndex = this.getLectureIndex(item);
-                var sitinIndex = this.getSitinIndex(item);
-                var lecturerIndex = this.getLecturerIndex(item);
-                var evangelistIndex = this.getEvangelistIndex(item); 
-                return{
-                    time: item.substring(timeIndex+8, lessonIndex),
-                    name: item.substring(nameIndex+9, venueIndex),
-                    dept: self.getMaleDept(item),
-                    lecture: item.substring(lessonIndex+15, sitinIndex),
-                    lecturer: item.substring(lecturerIndex+12, evangelistIndex),
-                    sitin: item.substring(sitinIndex+18, lecturerIndex),
-                    isMale: true
-                }
-
-            }else{
-                var array = item.split(',');
-                return {
-                    time: array[0],
-                    name: array[1],
-                    dept: array[2],
-                    lecture: array[3],
-                    lecturer: array[4],
-                    sitin: self.getFemaleSitin(array),
-                    isMale: false
-                }
+            var array = item.split(',');
+            return {
+                time: array[0],
+                name: array[1],
+                dept: array[2],
+                lecture: array[3],
+                lecturer: array[4],
+                sitin: self.getFemaleSitin(array),
+                isMale: false
             }
         }.bind(this));
-
         this.state.table1Disp = {display: 'none'};
         this.state.table2Disp = {display: 'block'};
         this.state.table3Disp = {display: 'none'};

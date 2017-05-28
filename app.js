@@ -7,17 +7,14 @@ var fs = require('fs');
 
 config.configServer(app);
 
-
-app.get('/*', function(req, res, next){
-    res.sendFile('default.html',{root: path.join(__dirname, 'public')});
-});
-
+var indexFile = express.static(path.join(__dirname, 'dist'), {'index': ['default.html']})
+app.use(indexFile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 config.startServer(app);
