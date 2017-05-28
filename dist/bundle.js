@@ -17757,17 +17757,25 @@ var _App = __webpack_require__(514);
 
 var _App2 = _interopRequireDefault(_App);
 
+var _LectureFormatter = __webpack_require__(520);
+
+var _LectureFormatter2 = _interopRequireDefault(_LectureFormatter);
+
+var _LectureSorter = __webpack_require__(517);
+
+var _LectureSorter2 = _interopRequireDefault(_LectureSorter);
+
+var _LectureResult = __webpack_require__(516);
+
+var _LectureResult2 = _interopRequireDefault(_LectureResult);
+
 var _reactRouter = __webpack_require__(206);
 
 var _reactRouterRedux = __webpack_require__(523);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var routes = _react2.default.createElement(
-	_reactRouter.Route,
-	null,
-	_react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
-); // import Lectures from './javascripts/components/lectures-formatter';
+// import Lectures from './javascripts/components/lectures-formatter';
 // import {render} from 'react-dom';
 // import React from 'react';
 // // import {Router, Route, browserHistory} from 'react-router';
@@ -17780,6 +17788,18 @@ var routes = _react2.default.createElement(
 // // 		<Route path="/" component={Lectures}/>
 // // 	</BrowserRouter>
 // // ), document.getElementById("app"));
+
+var routes = _react2.default.createElement(
+	_reactRouter.Route,
+	null,
+	_react2.default.createElement(
+		_reactRouter.Route,
+		{ component: _App2.default },
+		_react2.default.createElement(_reactRouter.Route, { path: '/', component: _LectureFormatter2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: '/sort', component: _LectureSorter2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: '/result', component: _LectureResult2.default })
+	)
+);
 
 var finalCreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)(_reduxThunk2.default))(_redux.createStore);
 
@@ -43260,18 +43280,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _LectureFormatter = __webpack_require__(520);
-
-var _LectureFormatter2 = _interopRequireDefault(_LectureFormatter);
-
-var _LectureSorter = __webpack_require__(517);
-
-var _LectureSorter2 = _interopRequireDefault(_LectureSorter);
-
-var _LectureResult = __webpack_require__(516);
-
-var _LectureResult2 = _interopRequireDefault(_LectureResult);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43295,9 +43303,7 @@ var App = function (_React$Component) {
 			return _react2.default.createElement(
 				'div',
 				null,
-				_react2.default.createElement(_LectureFormatter2.default, null),
-				_react2.default.createElement(_LectureSorter2.default, null),
-				_react2.default.createElement(_LectureResult2.default, null)
+				this.props.children
 			);
 		}
 	}]);

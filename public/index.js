@@ -21,12 +21,21 @@ import rootReducer from './reducers/main';
 import {compose, createStore, applyMiddleware} from 'redux';
 
 import AppContainer from './components/App';
+
+import LectureFormatter from './components/LectureFormatter';
+import LectureSorter from './components/LectureSorter';
+import LectureResult from './components/LectureResult';
+
 import { Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
 const routes = (
 	<Route>
-		<Route path='/' component={AppContainer}/>
+		<Route component={AppContainer}>
+			<Route path="/" component={LectureFormatter}/>
+			<Route path="/sort" component={LectureSorter}/>
+			<Route path="/result" component={LectureResult}/>
+		</Route>
 	</Route>
 );
 

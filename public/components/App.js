@@ -1,7 +1,4 @@
 import React from 'react';
-import LectureFormatter from './LectureFormatter';
-import LectureSorter from './LectureSorter';
-import LectureResult from './LectureResult';
 
 class App extends React.Component{
 	constructor(){
@@ -10,9 +7,7 @@ class App extends React.Component{
 	render() {
 		return (
 			<div>
-				<LectureFormatter/>
-				<LectureSorter/>
-				<LectureResult/>
+				{this.props.children}
 			</div>
 		)
 	}
