@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom';
+
 var util = {
 	isMorning: function(time){
 		return time.indexOf('am') > 0;
@@ -45,7 +47,36 @@ var util = {
 			return time1_min - time2_min;
 		else
 			return 1;
+	},
+	
+	getDomVal: function (component) {
+		return ReactDOM.findDOMNode(component).value;
+	},
+	
+	parse: function (lectures) {
+		let result = {};
+		let arr = lectures.trim().split("\n").map(function (text) {
+			return text.trim();
+		}).filter(function (text) {
+			return text.length > 0
+		});
+		
+		var currentDept;
+		arr.forEach(function (text) {
+			if (text.length < 20) {
+				currentDept = text;
+				result[currentDept] = []
+			} else {
+				let arr = text.split(",").map(function (text) {
+					return text.trim();
+				});
+				result[currentDept].push(arr);
+			}
+		});
+		
+		console.log(arr, arr.length);
+		return result;
 	}
-};
+}
 
 export default util;

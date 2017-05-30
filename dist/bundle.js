@@ -43444,7 +43444,10 @@ exports.default = reduce;
 
 var _immutable = __webpack_require__(519);
 
-var initialState = (0, _immutable.fromJS)({});
+var initialState = (0, _immutable.fromJS)({
+	maleLectures: {},
+	femaleLectures: {}
+});
 
 function reduce() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -48483,10 +48486,20 @@ var LectureFormatter = function (_React$Component) {
 	function LectureFormatter() {
 		_classCallCheck(this, LectureFormatter);
 
-		return _possibleConstructorReturn(this, (LectureFormatter.__proto__ || Object.getPrototypeOf(LectureFormatter)).call(this));
+		var _this = _possibleConstructorReturn(this, (LectureFormatter.__proto__ || Object.getPrototypeOf(LectureFormatter)).call(this));
+
+		_this.parse = _this.parse.bind(_this);
+		return _this;
 	}
 
 	_createClass(LectureFormatter, [{
+		key: 'parse',
+		value: function parse() {
+			var rawFemaleData = _util2.default.getDomVal(this.refs.female);
+			var rawMaleData = _util2.default.getDomVal(this.refs.male);
+			_util2.default.parse(rawFemaleData);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
@@ -48503,7 +48516,7 @@ var LectureFormatter = function (_React$Component) {
 							null,
 							'Female Lectures'
 						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea' })
+						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', ref: 'female' })
 					),
 					_react2.default.createElement(
 						'div',
@@ -48513,12 +48526,12 @@ var LectureFormatter = function (_React$Component) {
 							null,
 							'Male Lectures'
 						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea' })
+						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', ref: 'male' })
 					)
 				),
 				_react2.default.createElement(
 					_reactBootstrap.Button,
-					{ style: { marginTop: "25px", marginLeft: "25px" } },
+					{ onClick: this.parse, style: { marginTop: "25px", marginLeft: "25px" } },
 					'Format'
 				)
 			);
@@ -48528,7 +48541,9 @@ var LectureFormatter = function (_React$Component) {
 	return LectureFormatter;
 }(_react2.default.Component);
 
-exports.default = LectureFormatter;
+exports.default = (0, _reduxConnect.getConnectedComponent)(LectureFormatter, [], function (state) {
+	return {};
+});
 
 /***/ }),
 /* 521 */
@@ -53835,6 +53850,13 @@ function getConnectedComponent(componnet, actions, stateSelector) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _reactDom = __webpack_require__(20);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var util = {
 	isMorning: function isMorning(time) {
 		return time.indexOf('am') > 0;
@@ -53872,6 +53894,35 @@ var util = {
 		if (time1_hour == 12) return -1;
 		if (time2_hour == 12) return 1;
 		if (time1_hour < time2_hour) return -1;else if (time1_hour == time2_hour) return time1_min - time2_min;else return 1;
+	},
+
+	getDomVal: function getDomVal(component) {
+		return _reactDom2.default.findDOMNode(component).value;
+	},
+
+	parse: function parse(lectures) {
+		var result = {};
+		var arr = lectures.trim().split("\n").map(function (text) {
+			return text.trim();
+		}).filter(function (text) {
+			return text.length > 0;
+		});
+
+		var currentDept;
+		arr.forEach(function (text) {
+			if (text.length < 20) {
+				currentDept = text;
+				result[currentDept] = [];
+			} else {
+				var _arr = text.split(",").map(function (text) {
+					return text.trim();
+				});
+				result[currentDept].push(_arr);
+			}
+		});
+
+		console.log(arr, arr.length);
+		return result;
 	}
 };
 
