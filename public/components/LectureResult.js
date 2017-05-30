@@ -24,6 +24,7 @@ class LectureResult extends React.Component{
 						<tr>
 							<th>Time</th>
 							<th>Name</th>
+							<th>Department</th>
 							<th>Lecture</th>
 							<th>Lecturer</th>
 							<th>Sit-In</th>
@@ -34,19 +35,22 @@ class LectureResult extends React.Component{
 							return (
 								<tr key={'formattedLecture'+index}>
 									<td>
-										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture[0]}</p>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold',color:color}}>{lecture[0]}</p>
 									</td>
 									<td>
 										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold', color:color}}>{util.capitalize(lecture[1])}</p>
 									</td>
 									<td>
-										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{util.capitalize(lecture[2])}</p>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold', color:color}}>{util.capitalize(deptName)}</p>
 									</td>
 									<td>
-										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{util.capitalize(lecture[3])}</p>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold',color:color}}>{util.capitalize(lecture[2])}</p>
 									</td>
 									<td>
-										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{util.capitalize(lecture[4])}</p>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold',color:color}}>{util.capitalize(lecture[3])}</p>
+									</td>
+									<td>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold',color:color}}>{util.capitalize(lecture[4])}</p>
 									</td>
 								</tr>
 							);
