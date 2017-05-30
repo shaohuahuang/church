@@ -43387,7 +43387,7 @@ var LectureResult = function (_React$Component) {
 		key: 'renderLecturesPerGender',
 		value: function renderLecturesPerGender(lectures, isMale) {
 			var deptNames = Object.keys(lectures);
-			var gender = isMale ? "male" : "female";
+			var color = isMale ? "#3399ff" : "red";
 			return deptNames.map(function (deptName) {
 				var deptLectures = lectures[deptName];
 				return _react2.default.createElement(
@@ -43395,7 +43395,7 @@ var LectureResult = function (_React$Component) {
 					null,
 					_react2.default.createElement(
 						'p',
-						null,
+						{ style: { color: color, fontSize: "14px" } },
 						'Dept Name : ',
 						deptName
 					),
@@ -43456,7 +43456,7 @@ var LectureResult = function (_React$Component) {
 										null,
 										_react2.default.createElement(
 											'p',
-											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold', color: color } },
 											_util2.default.capitalize(lecture[1])
 										)
 									),
@@ -43502,7 +43502,7 @@ var LectureResult = function (_React$Component) {
 				{ style: { marginLeft: "5%", marginRight: "5%" } },
 				_react2.default.createElement(
 					'div',
-					null,
+					{ style: { border: "1px solid red", padding: "20px", borderRadius: "12px" } },
 					_react2.default.createElement(
 						'p',
 						{ style: { fontSize: "16px", fontWeight: "bold", color: "red" } },
@@ -43510,9 +43510,10 @@ var LectureResult = function (_React$Component) {
 					),
 					this.renderLecturesPerGender(this.props.femaleLectures, false)
 				),
+				_react2.default.createElement('hr', null),
 				_react2.default.createElement(
 					'div',
-					null,
+					{ style: { border: "1px solid #3399ff", padding: "20px", borderRadius: "12px" } },
 					_react2.default.createElement(
 						'p',
 						{ style: { fontSize: "16px", fontWeight: "bold", color: "#3399ff" } },
@@ -43729,7 +43730,7 @@ var LectureSorter = function (_React$Component) {
 				{ style: { marginLeft: "5%", marginRight: "5%" } },
 				_react2.default.createElement(
 					'div',
-					null,
+					{ style: { border: "1px solid red", padding: "20px", borderRadius: "12px" } },
 					_react2.default.createElement(
 						'p',
 						{ style: { fontSize: "16px", fontWeight: "bold", color: "red" } },
@@ -43737,9 +43738,10 @@ var LectureSorter = function (_React$Component) {
 					),
 					this.renderLecturesPerGender(this.props.femaleLectures, false)
 				),
+				_react2.default.createElement('hr', null),
 				_react2.default.createElement(
 					'div',
-					null,
+					{ style: { border: "1px solid #3399ff", padding: "20px", borderRadius: "12px" } },
 					_react2.default.createElement(
 						'p',
 						{ style: { fontSize: "16px", fontWeight: "bold", color: "#3399ff" } },
@@ -48851,7 +48853,7 @@ var LectureFormatter = function (_React$Component) {
 					{ className: 'textareaContainer' },
 					_react2.default.createElement(
 						'div',
-						{ style: { width: "45%", float: "left", marginLeft: "25px" } },
+						{ style: { width: "48%", float: "left", marginLeft: "25px" } },
 						_react2.default.createElement(
 							'p',
 							null,
@@ -48861,7 +48863,7 @@ var LectureFormatter = function (_React$Component) {
 					),
 					_react2.default.createElement(
 						'div',
-						{ style: { width: "45%", float: "right", marginRight: "25px" } },
+						{ style: { width: "48%", float: "right", marginRight: "25px" } },
 						_react2.default.createElement(
 							'p',
 							null,

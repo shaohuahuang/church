@@ -13,12 +13,12 @@ class LectureResult extends React.Component{
 	
 	renderLecturesPerGender(lectures, isMale){
 		let deptNames = Object.keys(lectures);
-		let gender = isMale?"male" : "female";
+		let color = isMale? "#3399ff": "red";
 		return deptNames.map(function (deptName) {
 			let deptLectures = lectures[deptName];
 			return (
 				<div>
-					<p>Dept Name : {deptName}</p>
+					<p style={{color: color, fontSize: "14px"}}>Dept Name : {deptName}</p>
 					<Table>
 						<thead>
 						<tr>
@@ -37,7 +37,7 @@ class LectureResult extends React.Component{
 										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{lecture[0]}</p>
 									</td>
 									<td>
-										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{util.capitalize(lecture[1])}</p>
+										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold', color:color}}>{util.capitalize(lecture[1])}</p>
 									</td>
 									<td>
 										<p style={{fontSize: '18px', fontFamily:'arial rounded mt bold'}}>{util.capitalize(lecture[2])}</p>
@@ -61,11 +61,12 @@ class LectureResult extends React.Component{
 	render(){
 		return(
 			<div style={{marginLeft: "5%", marginRight:"5%"}}>
-				<div>
+				<div style={{border: "1px solid red", padding: "20px",borderRadius: "12px"}}>
 					<p style={{fontSize:"16px",fontWeight:"bold",color:"red"}}>Female Lectures</p>
 					{this.renderLecturesPerGender(this.props.femaleLectures, false)}
 				</div>
-				<div>
+				<hr />
+				<div style={{border: "1px solid #3399ff", padding: "20px",borderRadius: "12px"}}>
 					<p style={{fontSize:"16px",fontWeight:"bold",color:"#3399ff"}}>Male Lectures</p>
 					{this.renderLecturesPerGender(this.props.maleLectures, true)}
 				</div>

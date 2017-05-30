@@ -22,11 +22,11 @@ class LectureFormatter extends React.Component {
 		return(
 			<div>
 				<div className="textareaContainer">
-					<div style={{width: "45%", float:"left", marginLeft:"25px"}}>
+					<div style={{width: "48%", float:"left", marginLeft:"25px"}}>
 						<p>Female Lectures</p>
 						<FormControl componentClass="textarea" ref="female"/>
 					</div>
-					<div style={{width: "45%", float:"right", marginRight:"25px"}}>
+					<div style={{width: "48%", float:"right", marginRight:"25px"}}>
 						<p>Male Lectures</p>
 						<FormControl componentClass="textarea" ref="male"/>
 					</div>

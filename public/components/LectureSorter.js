@@ -100,11 +100,12 @@ class LectureSorter extends React.Component{
 	render(){
 		return(
 			<div style={{marginLeft: "5%", marginRight:"5%"}}>
-				<div>
+				<div style={{border: "1px solid red", padding: "20px",borderRadius: "12px"}}>
 					<p style={{fontSize:"16px",fontWeight:"bold",color:"red"}}>Female Lectures</p>
 					{this.renderLecturesPerGender(this.props.femaleLectures, false)}
 				</div>
-				<div>
+				<hr />
+				<div style={{border: "1px solid #3399ff", padding: "20px",borderRadius: "12px"}}>
 					<p style={{fontSize:"16px",fontWeight:"bold",color:"#3399ff"}}>Male Lectures</p>
 					{this.renderLecturesPerGender(this.props.maleLectures, true)}
 				</div>
