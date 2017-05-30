@@ -43347,6 +43347,22 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reduxConnect = __webpack_require__(575);
+
+var _reactBootstrap = __webpack_require__(352);
+
+var _util = __webpack_require__(576);
+
+var _util2 = _interopRequireDefault(_util);
+
+var _reactRouterRedux = __webpack_require__(523);
+
+var _action_creators = __webpack_require__(577);
+
+var actions = _interopRequireWildcard(_action_creators);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43361,16 +43377,149 @@ var LectureResult = function (_React$Component) {
 	function LectureResult() {
 		_classCallCheck(this, LectureResult);
 
-		return _possibleConstructorReturn(this, (LectureResult.__proto__ || Object.getPrototypeOf(LectureResult)).call(this));
+		var _this = _possibleConstructorReturn(this, (LectureResult.__proto__ || Object.getPrototypeOf(LectureResult)).call(this));
+
+		_this.renderLecturesPerGender = _this.renderLecturesPerGender.bind(_this);
+		return _this;
 	}
 
 	_createClass(LectureResult, [{
+		key: 'renderLecturesPerGender',
+		value: function renderLecturesPerGender(lectures, isMale) {
+			var deptNames = Object.keys(lectures);
+			var gender = isMale ? "male" : "female";
+			return deptNames.map(function (deptName) {
+				var deptLectures = lectures[deptName];
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						null,
+						'Dept Name : ',
+						deptName
+					),
+					_react2.default.createElement(
+						_reactBootstrap.Table,
+						null,
+						_react2.default.createElement(
+							'thead',
+							null,
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement(
+									'th',
+									null,
+									'Time'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Name'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Lecture'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Lecturer'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Sit-In'
+								)
+							)
+						),
+						_react2.default.createElement(
+							'tbody',
+							null,
+							deptLectures.map(function (lecture, index) {
+								return _react2.default.createElement(
+									'tr',
+									{ key: 'formattedLecture' + index },
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'p',
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											lecture[0]
+										)
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'p',
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											_util2.default.capitalize(lecture[1])
+										)
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'p',
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											_util2.default.capitalize(lecture[2])
+										)
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'p',
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											_util2.default.capitalize(lecture[3])
+										)
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(
+											'p',
+											{ style: { fontSize: '18px', fontFamily: 'arial rounded mt bold' } },
+											_util2.default.capitalize(lecture[4])
+										)
+									)
+								);
+							})
+						)
+					)
+				);
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				'Result'
+				{ style: { marginLeft: "5%", marginRight: "5%" } },
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ style: { fontSize: "16px", fontWeight: "bold", color: "red" } },
+						'Female Lectures'
+					),
+					this.renderLecturesPerGender(this.props.femaleLectures, false)
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ style: { fontSize: "16px", fontWeight: "bold", color: "#3399ff" } },
+						'Male Lectures'
+					),
+					this.renderLecturesPerGender(this.props.maleLectures, true)
+				)
 			);
 		}
 	}]);
@@ -43378,7 +43527,9 @@ var LectureResult = function (_React$Component) {
 	return LectureResult;
 }(_react2.default.Component);
 
-exports.default = LectureResult;
+exports.default = (0, _reduxConnect.getConnectedComponent)(LectureResult, [actions, { push: _reactRouterRedux.push }], function (state) {
+	return state.lecture.toJS();
+});
 
 /***/ }),
 /* 517 */
@@ -43397,6 +43548,22 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reduxConnect = __webpack_require__(575);
+
+var _reactBootstrap = __webpack_require__(352);
+
+var _util = __webpack_require__(576);
+
+var _util2 = _interopRequireDefault(_util);
+
+var _reactRouterRedux = __webpack_require__(523);
+
+var _action_creators = __webpack_require__(577);
+
+var actions = _interopRequireWildcard(_action_creators);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43411,16 +43578,180 @@ var LectureSorter = function (_React$Component) {
 	function LectureSorter() {
 		_classCallCheck(this, LectureSorter);
 
-		return _possibleConstructorReturn(this, (LectureSorter.__proto__ || Object.getPrototypeOf(LectureSorter)).call(this));
+		var _this = _possibleConstructorReturn(this, (LectureSorter.__proto__ || Object.getPrototypeOf(LectureSorter)).call(this));
+
+		_this.renderLecturesPerGender = _this.renderLecturesPerGender.bind(_this);
+		_this.onSort = _this.onSort.bind(_this);
+		_this.getModifiedLectures = _this.getModifiedLectures.bind(_this);
+		return _this;
 	}
 
 	_createClass(LectureSorter, [{
+		key: 'renderLecturesPerGender',
+		value: function renderLecturesPerGender(lectures, isMale) {
+			var deptNames = Object.keys(lectures);
+			var gender = isMale ? "male" : "female";
+			return deptNames.map(function (deptName) {
+				var deptLectures = lectures[deptName];
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						null,
+						'Dept Name : ',
+						deptName
+					),
+					_react2.default.createElement(
+						_reactBootstrap.Table,
+						null,
+						_react2.default.createElement(
+							'thead',
+							null,
+							_react2.default.createElement(
+								'tr',
+								null,
+								_react2.default.createElement(
+									'th',
+									null,
+									'Index'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Time'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Name'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Lecture'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Lecturer'
+								),
+								_react2.default.createElement(
+									'th',
+									null,
+									'Sit-In'
+								)
+							)
+						),
+						_react2.default.createElement(
+							'tbody',
+							null,
+							deptLectures.map(function (lecture, index) {
+								return _react2.default.createElement(
+									'tr',
+									{ key: 'formattedLecture' + index },
+									_react2.default.createElement(
+										'td',
+										null,
+										index + 1
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: gender + deptName + 'time' + index, defaultValue: lecture[0] })
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: gender + deptName + 'name' + index, defaultValue: lecture[1] })
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: gender + deptName + 'lecture' + index, defaultValue: lecture[2] })
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: gender + deptName + 'lecturer' + index, defaultValue: lecture[3] })
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', ref: gender + deptName + 'sitin' + index, defaultValue: _util2.default.getSitins(lecture) })
+									)
+								);
+							})
+						)
+					)
+				);
+			}.bind(this));
+		}
+	}, {
+		key: 'getModifiedLectures',
+		value: function getModifiedLectures(isMale) {
+			var self = this;
+			var gender = isMale ? "male" : "female";
+			var lectures = isMale ? this.props.maleLectures : this.props.femaleLectures;
+			var deptNames = Object.keys(lectures);
+			var modifiedLectures = deptNames.reduce(function (memo, deptName) {
+				var deptLectures = lectures[deptName];
+				var modifiedDeptLectures = [];
+				for (var i = 0; i < deptLectures.length; i++) {
+					var time = _util2.default.getDomVal(self.refs[gender + deptName + "time" + i]);
+					var name = _util2.default.getDomVal(self.refs[gender + deptName + "name" + i]);
+					var lecture = _util2.default.getDomVal(self.refs[gender + deptName + "lecture" + i]);
+					var lecturer = _util2.default.getDomVal(self.refs[gender + deptName + "lecturer" + i]);
+					var sitin = _util2.default.getDomVal(self.refs[gender + deptName + "sitin" + i]);
+					modifiedDeptLectures.push([time, name, lecture, lecturer, sitin]);
+				}
+				modifiedDeptLectures.sort(function (lecture1, lecture2) {
+					return _util2.default.compareTime(lecture1[0], lecture2[0]);
+				});
+				memo[deptName] = modifiedDeptLectures;
+				return memo;
+			}, {});
+			return modifiedLectures;
+		}
+	}, {
+		key: 'onSort',
+		value: function onSort() {
+			var maleLectures = this.getModifiedLectures(true);
+			var femaleLectures = this.getModifiedLectures(false);
+			this.props.collateLectures(maleLectures, femaleLectures);
+			this.props.push('/result');
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				'Sorter'
+				{ style: { marginLeft: "5%", marginRight: "5%" } },
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ style: { fontSize: "16px", fontWeight: "bold", color: "red" } },
+						'Female Lectures'
+					),
+					this.renderLecturesPerGender(this.props.femaleLectures, false)
+				),
+				_react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'p',
+						{ style: { fontSize: "16px", fontWeight: "bold", color: "#3399ff" } },
+						'Male Lectures'
+					),
+					this.renderLecturesPerGender(this.props.maleLectures, true)
+				),
+				_react2.default.createElement(
+					_reactBootstrap.Button,
+					{ onClick: this.onSort },
+					'Sort'
+				)
 			);
 		}
 	}]);
@@ -43428,7 +43759,9 @@ var LectureSorter = function (_React$Component) {
 	return LectureSorter;
 }(_react2.default.Component);
 
-exports.default = LectureSorter;
+exports.default = (0, _reduxConnect.getConnectedComponent)(LectureSorter, [actions, { push: _reactRouterRedux.push }], function (state) {
+	return state.lecture.toJS();
+});
 
 /***/ }),
 /* 518 */
@@ -43444,6 +43777,8 @@ exports.default = reduce;
 
 var _immutable = __webpack_require__(519);
 
+var _action_creators = __webpack_require__(577);
+
 var initialState = (0, _immutable.fromJS)({
 	maleLectures: {},
 	femaleLectures: {}
@@ -43453,7 +43788,10 @@ function reduce() {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	var action = arguments[1];
 
-	switch (action.type) {}
+	switch (action.type) {
+		case _action_creators.actions.COLLATE_LECTURES:
+			return state.clear().merge(action.data);
+	}
 	return state;
 }
 
@@ -48458,10 +48796,6 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(20);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _reactBootstrap = __webpack_require__(352);
 
 var _reactRouterRedux = __webpack_require__(523);
@@ -48471,6 +48805,12 @@ var _reduxConnect = __webpack_require__(575);
 var _util = __webpack_require__(576);
 
 var _util2 = _interopRequireDefault(_util);
+
+var _action_creators = __webpack_require__(577);
+
+var actions = _interopRequireWildcard(_action_creators);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48497,7 +48837,8 @@ var LectureFormatter = function (_React$Component) {
 		value: function parse() {
 			var rawFemaleData = _util2.default.getDomVal(this.refs.female);
 			var rawMaleData = _util2.default.getDomVal(this.refs.male);
-			_util2.default.parse(rawFemaleData);
+			this.props.collateLectures(_util2.default.parse(rawMaleData), _util2.default.parse(rawFemaleData));
+			this.props.push('/sort');
 		}
 	}, {
 		key: 'render',
@@ -48541,7 +48882,7 @@ var LectureFormatter = function (_React$Component) {
 	return LectureFormatter;
 }(_react2.default.Component);
 
-exports.default = (0, _reduxConnect.getConnectedComponent)(LectureFormatter, [], function (state) {
+exports.default = (0, _reduxConnect.getConnectedComponent)(LectureFormatter, [actions, { push: _reactRouterRedux.push }], function (state) {
 	return {};
 });
 
@@ -53865,9 +54206,12 @@ var util = {
 	compareTime: function compareTime(time1, time2) {
 		if (this.isMorning(time1) && !this.isMorning(time2)) return -1;
 		if (!this.isMorning(time1) && this.isMorning(time2)) return 1;
-		var time1_hour, time1_min, time2_hour, time2_min;
+		var time1_hour = void 0,
+		    time1_min = void 0,
+		    time2_hour = void 0,
+		    time2_min = void 0;
 
-		if (time1.indexOf(':') == -1) {
+		if (time1.indexOf(':') === -1) {
 			time1_hour = time1.substring(0, time1.length - 2);
 			time1_min = 0;
 		} else {
@@ -53876,13 +54220,13 @@ var util = {
 			time1_min = array[1].substring(0, array[1].length - 2);
 		}
 
-		if (time2.indexOf(':') == -1) {
+		if (time2.indexOf(':') === -1) {
 			time2_hour = time2.substring(0, time2.length - 2);
 			time2_min = 0;
 		} else {
-			var array = time2.split(':');
-			time2_hour = array[0];
-			time2_min = array[1].substring(0, array[1].length - 2);
+			var _array = time2.split(':');
+			time2_hour = _array[0];
+			time2_min = _array[1].substring(0, _array[1].length - 2);
 		}
 
 		time1_hour = parseFloat(time1_hour);
@@ -53921,12 +54265,51 @@ var util = {
 			}
 		});
 
-		console.log(arr, arr.length);
 		return result;
+	},
+
+	/*lecture format: time, name, lesson, lecturers, sit-ins..., venue*/
+	getSitins: function getSitins(lecture) {
+		if (lecture.length <= 5) return "-";
+		return lecture.slice(4, lecture.length - 1).join(",");
+	},
+
+	capitalize: function capitalize(str) {
+		var array = str.split(' ');
+		var result = array.map(this.capitalizeFirstLetter);
+		return result.join(' ');
+	},
+
+	capitalizeFirstLetter: function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 };
 
 exports.default = util;
+
+/***/ }),
+/* 577 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.collateLectures = collateLectures;
+var actions = exports.actions = {
+	COLLATE_LECTURES: "COLLATE_LECTURES"
+};
+
+function collateLectures(maleLectures, femaleLectures) {
+	return {
+		type: actions.COLLATE_LECTURES,
+		data: {
+			maleLectures: maleLectures, femaleLectures: femaleLectures
+		}
+	};
+}
 
 /***/ })
 /******/ ]);

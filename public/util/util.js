@@ -7,25 +7,25 @@ var util = {
 	
 	compareTime: function(time1, time2){
 		if(this.isMorning(time1)&&!this.isMorning(time2))
-			return -1
+			return -1;
 		if(!this.isMorning(time1)&&this.isMorning(time2))
-			return 1
-		var time1_hour, time1_min, time2_hour, time2_min;
+			return 1;
+		let time1_hour, time1_min, time2_hour, time2_min;
 		
-		if(time1.indexOf(':')==-1){
+		if(time1.indexOf(':')===-1){
 			time1_hour = time1.substring(0, time1.length-2);
 			time1_min = 0;
 		}else{
-			var array = time1.split(':');
+			let array = time1.split(':');
 			time1_hour = array[0];
 			time1_min = array[1].substring(0,array[1].length-2);
 		}
 		
-		if(time2.indexOf(':')==-1){
+		if(time2.indexOf(':')===-1){
 			time2_hour = time2.substring(0, time2.length-2);
 			time2_min = 0;
 		}else{
-			var array = time2.split(':');
+			let array = time2.split(':');
 			time2_hour = array[0];
 			time2_min = array[1].substring(0,array[1].length-2);
 		}
@@ -74,8 +74,24 @@ var util = {
 			}
 		});
 		
-		console.log(arr, arr.length);
 		return result;
+	},
+	
+	/*lecture format: time, name, lesson, lecturers, sit-ins..., venue*/
+	getSitins: function (lecture) {
+		if(lecture.length <= 5)
+			return "-";
+		return lecture.slice(4,lecture.length-1).join(",");
+	},
+	
+	capitalize: function(str){
+		var array = str.split(' ');
+		var result = array.map(this.capitalizeFirstLetter);
+		return result.join(' ');
+	},
+	
+	capitalizeFirstLetter: function(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 }
 

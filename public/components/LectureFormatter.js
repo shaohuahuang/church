@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Table, FormControl, Button} from 'react-bootstrap';
 import {push} from 'react-router-redux';
 import {getConnectedComponent} from '../util/redux-connect';
 import util from '../util/util';
+import * as actions from '../actions/action_creators';
 
 class LectureFormatter extends React.Component {
 	constructor(){
@@ -14,7 +14,8 @@ class LectureFormatter extends React.Component {
 	parse(){
 		let rawFemaleData = util.getDomVal(this.refs.female);
 		let rawMaleData = util.getDomVal(this.refs.male);
-		util.parse(rawFemaleData)
+		this.props.collateLectures(util.parse(rawMaleData),util.parse(rawFemaleData));
+		this.props.push('/sort');
 	}
 	
 	render(){
@@ -36,7 +37,7 @@ class LectureFormatter extends React.Component {
 	}
 }
 
-export default getConnectedComponent(LectureFormatter, [], (state) => {
+export default getConnectedComponent(LectureFormatter, [actions,{push}], (state) => {
 	return {
 	
 	}

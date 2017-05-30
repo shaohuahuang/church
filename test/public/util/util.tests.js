@@ -34,7 +34,20 @@ describe('test util.js', ()=>{
 			assert.deepEqual(result["SS"][0].join(","), "4pm,Phebe,7 Steps Laws,Yi Xin,Church");
 			assert.deepEqual(result["SS+"][1].join(","), "12pm,Jin Yi,Spiritual Tour 2016 Msg,AJ,Church");
 		});
-		
-		
+	})
+	
+	describe('test get sitins', ()=>{
+		it('no sit-in', ()=>{
+			let lecture = ["2pm", "Cher", "Predestination",  "Yi Xin", "Church"];
+			assert.equal(util.getSitins(lecture),"-");
+		});
+		it('one sit-in', ()=>{
+			let lecture = ["2pm", "Cher", "Predestination",  "Yi Xin", "Violet", "Church"];
+			assert.equal(util.getSitins(lecture),"Violet");
+		});
+		it("two sit-ins", ()=>{
+			let lecture = ["2pm", "Cher", "Predestination",  "Yi Xin", "Violet","Jia Wen", "Church"];
+			assert.equal(util.getSitins(lecture),"Violet,Jia Wen");
+		})
 	})
 });
